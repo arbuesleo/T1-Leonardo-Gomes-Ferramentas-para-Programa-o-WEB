@@ -1,0 +1,113 @@
+<!doctype html>  
+<html lang="pt-br" ng-app = "Forca">  
+	<head>  
+		<meta charset="utf-8">  
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+		<title>Forca - Leonardo Gomes</title>  
+		<link href="css/bootstrap.min.css" rel="stylesheet">  
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/forca.css" rel="stylesheet">
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/angular.min.js"></script>
+		<script src="js/forca.js"></script>  
+	</head>
+	<body>
+		<div class="container" ng-controller = "gameForca">
+		<p></p>
+			<!--Linha apresentação boneco e casas das palavras -->
+			<div class="row">
+			<!--Div apresentação boneco -->
+				<div class="col-xs-3">
+					<img src="img/{{imgBoneco}}" alt="" class="img-rounded">
+				</div>
+
+				<!--Div apresentação casas das palavras -->
+
+				<div class="col-xs-9 palavra">
+				<!--Loop para apresentação das casas -->
+					<div ng-repeat="n in palavraEscolhida track by $index">
+  						<div class="col-xs-1">
+							<input type="text" class="form-control" placeholder=""  disabled="disabled"  id="{{n}}" value={{palavraMontada[$index]}}>
+						</div> 
+					</div>
+				</div>
+			</div>
+
+			<p></p>
+			<!--Linha apresentação das letras já utilizadas, quantidade de erros e dicas-->
+			<div class="row">
+				<div class = "col-xs-12">
+					<button type="button" class="btn btn-danger" ng-click="iniciaJogo()">Iniciar Jogo</button>
+				</div>
+				<!-- Teclado -->
+				<div class = "col-xs-12 teclado">
+					<button type="button" class="btn btn-default" ng-click="joga('A')" onClick="this.disabled = 'true'" id="btnA">A</button>
+					<button type="button" class="btn btn-default" ng-click="joga('B')" onClick="this.disabled = 'true'" id="btnB">B</button>
+					<button type="button" class="btn btn-default" ng-click="joga('C')" onClick="this.disabled = 'true'" id="btnC">C</button>
+					<button type="button" class="btn btn-default" ng-click="joga('D')" onClick="this.disabled = 'true'" id="btnD">D</button>
+					<button type="button" class="btn btn-default" ng-click="joga('E')" onClick="this.disabled = 'true'" id="btnE">E</button>
+					<button type="button" class="btn btn-default" ng-click="joga('F')" onClick="this.disabled = 'true'" id="btnF">F</button>
+					<button type="button" class="btn btn-default" ng-click="joga('G')" onClick="this.disabled = 'true'" id="btnG">G</button>
+					<button type="button" class="btn btn-default" ng-click="joga('H')" onClick="this.disabled = 'true'" id="btnH">H</button>
+					<button type="button" class="btn btn-default" ng-click="joga('I')"
+					onClick="this.disabled = 'true'" id="btnI">I</button>
+					<button type="button" class="btn btn-default" ng-click="joga('J')" onClick="this.disabled = 'true'" id="btnJ">J</button>
+					<button type="button" class="btn btn-default" ng-click="joga('K')" onClick="this.disabled = 'true'" id="btnK">K</button>
+					<button type="button" class="btn btn-default" ng-click="joga('L')" onClick="this.disabled = 'true'" id="btnL">L</button>
+					<button type="button" class="btn btn-default" ng-click="joga('M')" onClick="this.disabled = 'true'" id="btnM">M</button>
+					<button type="button" class="btn btn-default" ng-click="joga('N')"onClick="this.disabled = 'true'" id="btnN">N</button>
+					<button type="button" class="btn btn-default" ng-click="joga('O')" onClick="this.disabled = 'true'" id="btnO">O</button>
+					<button type="button" class="btn btn-default" ng-click="joga('P')" onClick="this.disabled = 'true'" id="btnP">P</button>
+					<button type="button" class="btn btn-default" ng-click="joga('Q')" onClick="this.disabled = 'true'" id="btnQ">Q</button>
+					<button type="button" class="btn btn-default" ng-click="joga('R')" onClick="this.disabled = 'true'" id="btnR">R</button>
+					<button type="button" class="btn btn-default" ng-click="joga('S')" onClick="this.disabled = 'true'" id="btnS">S</button>
+					<button type="button" class="btn btn-default" ng-click="joga('T')" onClick="this.disabled = 'true'" id="btnT">T</button>
+					<button type="button" class="btn btn-default" ng-click="joga('U')" onClick="this.disabled = 'true'" id="btnU">U</button>
+					<button type="button" class="btn btn-default" ng-click="joga('V')" onClick="this.disabled = 'true'" id="btnV">V</button>
+					<button type="button" class="btn btn-default" ng-click="joga('X')" onClick="this.disabled = 'true'" id="btnX">X</button>
+					<button type="button" class="btn btn-default" ng-click="joga('W')" onClick="this.disabled = 'true'" id="btnW">W</button>
+					<button type="button" class="btn btn-default" ng-click="joga('Y')" onClick="this.disabled = 'true'" id="btnY">Y</button>
+					<button type="button" class="btn btn-default" ng-click="joga('Z')" onClick="this.disabled = 'true'" id="btnZ">Z</button>
+				</div>
+				<span>
+					
+				</span>
+				<div class="row" align="center">
+					<div class = "col-xs-12 dica">
+						{{dica}}
+					</div>
+				</div>
+			<!--Dialog-->
+			<div class="modal fade" data-backdrop="static" id="options" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h4 class="modal-title" id="myModalLabel">Atenção!</h4>
+			      </div>
+			      <div class="modal-body">
+			        {{msgModal}}
+			      </div>
+			      <div class="modal-footer">
+			      	<button type="button" ng-click = "close()" class="btn btn-danger" data-dismiss="modal">Sair da Pagina</button>
+			       <button type="button" ng-click = "iniciaJogo()" class="btn btn-primary" data-dismiss="modal">Reiniciar Jogo</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade" id="modalMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h4 class="modal-title" id="myModalLabel">Atenção!</h4>
+			      </div>
+			      <div class="modal-body">
+			        {{msg}}
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<!--Final container e ng-controller-->
+	</body>
+</html>

@@ -1,0 +1,23 @@
+.casa {
+	height: 200px;
+	border: 1px solid #D3D3D3;
+	font-size: 170px;
+}
+.palavra {
+	padding: 0px;
+	margin-top: 100px;
+	margin-left: 0px;
+}
+
+.teclado {
+	
+	margin-top: 10px;
+	text-align: center;
+}
+
+.dica {
+	
+	margin-top: 10px;
+	text-align: center;
+	font-size: 20px;
+}
