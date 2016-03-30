@@ -29,7 +29,7 @@ app.controller("gameForca", function ($scope) {
     document.getElementById("btnW").disabled = true;
 
 	//variavel para imagem do boneco
-	$scope.imgBoneco = "boneco-forca-0.png";
+	$scope.imgBoneco = "Boneco-Forca-0.png";
 
 	//vetor para armazenar as palavras
 	$scope.palavras = [];
@@ -65,7 +65,7 @@ app.controller("gameForca", function ($scope) {
 	//Sorteia uma palavra, inicia variaveis para o jogo e habilita todas as teclas do teclado
 	$scope.iniciaJogo = function () {
 		var pos = Math.floor(Math.random() * 19 + 0);
-		$scope.imgBoneco = "boneco-forca-0.png";
+		$scope.imgBoneco = "Boneco-Forca-0.png";
 		$scope.erros = 0;
 		$scope.palavraEscolhida = [];
 		$scope.palavraMontada = [];
@@ -131,7 +131,7 @@ app.controller("gameForca", function ($scope) {
 		if (!tem) 
 		{
 			$scope.erros++;
-			$scope.imgBoneco = "boneco-forca-" + $scope.erros + ".png";
+			$scope.imgBoneco = "Boneco-Forca-" + $scope.erros + ".png";
 			//Ser erros maior que 5 o jogador perde, exibe mensagem de perdedor
 			if ($scope.erros > 5) {
 				$scope.msgModal = "Você Perdeu!";
